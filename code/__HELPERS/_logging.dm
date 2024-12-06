@@ -84,7 +84,7 @@
 /proc/log_law(text)
 	if (CONFIG_GET(flag/log_law))
 		WRITE_LOG(GLOB.world_game_log, "\[[logtime]] LAW: [text]")
-	
+
 /proc/log_seen_internal(text)
 	WRITE_LOG(GLOB.world_seen_log, "\[[logtime]] SEEN: [text]")
 
@@ -113,6 +113,10 @@
 /proc/log_say(text)
 	if (CONFIG_GET(flag/log_say))
 		WRITE_LOG(GLOB.world_game_log, "\[[logtime]] SAY: [text]")
+
+/proc/log_looc(text)
+	if (CONFIG_GET(flag/log_looc))
+		WRITE_LOG(GLOB.world_game_log, "\[[logtime]] LOOC: [text]")
 
 /proc/log_ooc(text)
 	if (CONFIG_GET(flag/log_ooc))
