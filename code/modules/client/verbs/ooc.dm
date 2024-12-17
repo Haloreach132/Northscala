@@ -6,21 +6,12 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 /client/verb/ooc(msg as text)
 	set name = "OOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
 	set category = "OOC"
-	set hidden = 0
+	set hidden = 1
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
 		return
 
 	if(!mob)
-		return
-
-	if(CONFIG_GET(flag/usewhitelist))
-		if(whitelisted() != 1)
-			to_chat(src, span_danger("I can't use that."))
-			return
-
-	if(get_playerquality(ckey) <= -5)
-		to_chat(src, span_danger("I can't use that."))
 		return
 
 	if(!holder)
@@ -114,15 +105,6 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 		return
 
 	if(!mob)
-		return
-
-	if(CONFIG_GET(flag/usewhitelist))
-		if(whitelisted() != 1)
-			to_chat(src, span_danger("I can't use that."))
-			return
-
-	if(get_playerquality(ckey) <= -5)
-		to_chat(src, span_danger("I can't use that."))
 		return
 
 	if(!holder)
@@ -580,6 +562,16 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 		pct += delta
 		winset(src, "mainwindow.split", "splitter=[pct]")
 
+
+/client/verb/runm()
+	set name = "Run Mode"
+	set desc = "Changes if you run continually or if you stop running when you turn"
+	set category = "Options"
+	prefs.toggles ^= RUN_MODE
+	if(prefs.toggles & RUN_MODE)
+		to_chat(usr, "Running changed (no turning)")
+	else
+		to_chat(usr, "Running changed (turning)")
 
 /client/verb/policy()
 	set name = "Show Policy"

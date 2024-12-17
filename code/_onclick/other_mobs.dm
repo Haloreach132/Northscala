@@ -205,6 +205,16 @@
 	if(user.pulling != src)
 		if(!lying_attack_check(user))
 			return FALSE
+	
+	if(isseelie(src))
+		if(user.patron.type == /datum/patron/inhumen/graggar)
+			if(user.pulling == src)
+				if(user.grab_state == GRAB_AGGRESSIVE)
+					visible_message(span_danger("[user] is putting [src]'s head in their mouth!"), \
+									span_userdanger("[user] is putting my head in their mouth!"))
+					if(do_after(user, 8 SECONDS, target = src))
+						var/obj/item/bodypart/head/head = src.get_bodypart("head")
+						head.dismember()
 
 	var/obj/item/bodypart/affecting = get_bodypart(check_zone(def_zone))
 	if(!affecting)
@@ -601,7 +611,7 @@
 	A.attack_animal(src)
 
 /atom/proc/attack_animal(mob/user)
-	return
+	SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_ANIMAL, user)
 
 /mob/living/RestrainedClickOn(atom/A)
 	return

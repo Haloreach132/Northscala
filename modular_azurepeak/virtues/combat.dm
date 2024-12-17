@@ -14,38 +14,6 @@
 		else
 			to_chat(recipient, span_notice("I'm too trained in defensive tactics for my Virtue to benefit my spell knowledge any further."))
 
-/datum/virtue/combat/devotee
-	name = "Devotee"
-	desc = "Though not officially of the Church, my relationship with my chosen Patron is strong enough to grant me the most minor of their blessings."
-	added_skills = list(/datum/skill/magic/holy = 1)
-
-/datum/virtue/combat/devotee/apply_to_human(mob/living/carbon/human/recipient)
-	if (!recipient.mind)
-		return
-	if (!recipient.devotion)
-		// only give non-devotionists orison... and t0 for some reason (this is probably a bad idea)
-		var/datum/devotion/new_faith = new /datum/devotion(recipient, recipient.patron)
-		var/datum/patron/our_patron = new_faith.patron
-		new_faith.max_devotion = CLERIC_REQ_1 - 20
-		new_faith.max_progression = CLERIC_REQ_1 - 20
-		recipient.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
-		recipient.mind?.AddSpell(new our_patron.t0) // i dunno... let's see how it plays out
-	else
-		// for devotionists, bump up their maximum 1 tier and give them a TINY amount of passive devo gain
-		var/datum/devotion/our_faith = recipient.devotion
-		our_faith.passive_devotion_gain += 0.15
-		switch (our_faith.max_progression)
-			if (CLERIC_REQ_0)
-				our_faith.max_progression = CLERIC_REQ_1
-			if (CLERIC_REQ_1)
-				our_faith.max_progression = CLERIC_REQ_2
-			if (CLERIC_REQ_2)
-				our_faith.max_progression = CLERIC_REQ_3
-			if (CLERIC_REQ_3)
-				our_faith.max_progression = CLERIC_REQ_4
-			if (CLERIC_REQ_4)
-				our_faith.passive_devotion_gain += 1
-
 /datum/virtue/combat/duelist
 	name = "Duelist Apprentice"
 	desc = "I have trained under a duelist of considerable skill, and always have my trusty rapier close at hand."
@@ -54,9 +22,10 @@
 
 /datum/virtue/combat/bowman
 	name = "Toxophilite"
-	desc = "I have studied underneath a bowman of considerable skill, and always have my trusty bow close at hand."
+	desc = "I have studied underneath a bowman of considerable skill, and always have my trusty bow and a quiver of arrows close at hand."
 	added_skills = list(list(/datum/skill/combat/bows, 1, 4))
 	added_stashed_items = list("Recurve Bow" = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve,
+								"Quiver (Arrows)" = /obj/item/ammo_holder/quiver/arrows
 	)
 
 /*/datum/virtue/combat/tavern_brawler

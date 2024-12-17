@@ -164,6 +164,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["anonymize"]			>> anonymize
 	S["crt"]			>> crt
 	S["grain"]				>> grain
+	S["sexable"]			>> sexable
+	S["shake"]				>> shake
 	S["mastervol"]			>> mastervol
 	S["lastclass"]			>> lastclass
 
@@ -344,6 +346,12 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	else
 		virtue = new /datum/virtue/none
 
+/datum/preferences/proc/_load_loadout(S)
+	var/loadout_type
+	S["loadout"] >> loadout_type
+	if (loadout_type)
+		loadout = new loadout_type()
+
 /datum/preferences/proc/_load_appearence(S)
 	S["real_name"]			>> real_name
 	S["gender"]				>> gender
@@ -374,6 +382,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_mcolor2"]					>> features["mcolor2"]
 	S["feature_mcolor3"]					>> features["mcolor3"]
 	S["feature_ethcolor"]					>> features["ethcolor"]
+	S["virginity"]							>> virginity
 
 /datum/preferences/proc/load_character(slot)
 	if(!path)
@@ -402,8 +411,19 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	_load_virtue(S)
 	_load_flaw(S)
 
-	// LETHALSTONE edit: jank-ass load our statpack choice
+	if(!S["features["mcolor"]"] || S["features["mcolor"]"] == "#000")
+		WRITE_FILE(S["features["mcolor"]"]	, "#FFF")
+	if(!S["features["mcolor2"]"] || S["features["mcolor2"]"] == "#000")
+		WRITE_FILE(S["features["mcolor2"]"]	, "#FFF")
+	if(!S["features["mcolor3"]"] || S["features["mcolor3"]"] == "#000")
+		WRITE_FILE(S["features["mcolor3"]"]	, "#FFF")
+
+	if(!S["feature_ethcolor"] || S["feature_ethcolor"] == "#000")
+		WRITE_FILE(S["feature_ethcolor"], "9c3030")
+
 	_load_statpack(S)
+
+	_load_loadout(S)
 
 	if(!S["features["mcolor"]"] || S["features["mcolor"]"] == "#000")
 		WRITE_FILE(S["features["mcolor"]"]	, "#FFF")
@@ -446,9 +466,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(!valid_headshot_link(null, headshot_link, TRUE))
 		headshot_link = null
 
-	S["null_link"]			>> nudeshot_link
-	if(!valid_headshot_link(null, nudeshot_link, TRUE))
-		nudeshot_link = null
+	S["char_accent"]		>> char_accent
+	if (!char_accent)
+		char_accent = "No accent"
 
 	//try to fix any outdated data if necessary
 	if(needs_update >= 0)
@@ -497,6 +517,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["body_markings"] >> body_markings
 	body_markings = SANITIZE_LIST(body_markings)
 	validate_body_markings()
+
+	virginity = sanitize_integer(virginity, FALSE, TRUE, FALSE)
 
 	S["descriptor_entries"] >> descriptor_entries
 	descriptor_entries = SANITIZE_LIST(descriptor_entries)
@@ -562,8 +584,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_mcolor2"]					, features["mcolor2"])
 	WRITE_FILE(S["feature_mcolor3"]					, features["mcolor3"])
 	WRITE_FILE(S["feature_ethcolor"]					, features["ethcolor"])
-	WRITE_FILE(S["statpack"]					, statpack.type)
-	WRITE_FILE(S["virtue"]					, virtue.type)
+	WRITE_FILE(S["char_accent"] 						, char_accent)
+
+	//virginity
+	WRITE_FILE(S["virginity"], virginity)
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -593,7 +617,12 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	WRITE_FILE(S["update_mutant_colors"] , update_mutant_colors)
 	WRITE_FILE(S["headshot_link"] , headshot_link)
-	WRITE_FILE(S["null_link"] , nudeshot_link)
+	WRITE_FILE(S["statpack"] , statpack.type)
+	WRITE_FILE(S["virtue"] , virtue.type)
+	if(loadout)
+		WRITE_FILE(S["loadout"] , loadout.type)
+	else
+		WRITE_FILE(S["loadout"] , null)
 
 	return TRUE
 

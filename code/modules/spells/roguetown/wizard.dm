@@ -553,6 +553,9 @@
 	light_flags = NONE
 	light_color = "#3FBAFD"
 
+	icon = 'icons/roguetown/items/lighting.dmi'
+	icon_state = "wisp"
+
 //A spell to choose new spells, upon spawning or gaining levels
 /obj/effect/proc_holder/spell/invoked/learnspell
 	name = "Attempt to learn a new spell"
@@ -758,7 +761,7 @@
 
 /obj/effect/proc_holder/spell/invoked/message/cast(list/targets, mob/user)
 	. = ..()
-	var/input = stripped_input(user, "Who are you trying to contact?")
+	var/input = html_decode(input(user, "Who are you trying to contact?"))
 	if(!input)
 		return
 	if(!user.key)
@@ -885,9 +888,12 @@
 	playsound(T,'sound/magic/charged.ogg', 80, TRUE)
 	for(var/mob/living/L in T.contents)
 		var/def_zone = pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
-		var/obj/item/bodypart/BP = L.get_bodypart(def_zone)
 		L.apply_damage(damage, BRUTE, def_zone)
-		BP.add_wound(/datum/wound/fracture)
+
+		if(prob(33))
+			var/obj/item/bodypart/BP = L.get_bodypart(def_zone)
+			BP.add_wound(/datum/wound/fracture)
+
 		L.adjustBruteLoss(damage)
 		playsound(T, "genslash", 80, TRUE)
 		to_chat(L, "<span class='userdanger'>I'm cut by blades rising from the floor!</span>")

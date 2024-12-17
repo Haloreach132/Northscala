@@ -13,11 +13,12 @@
 	outfit = /datum/outfit/job/roguetown/guildsmith
 	display_order = JDO_GUILDSMITH
 	give_bank_account = 11
-	min_pq = 0
+	min_pq = 1
 	max_pq = null
 
 /datum/outfit/job/roguetown/guildsmith/pre_equip(mob/living/carbon/human/H)
 	..()
+	gloves = /obj/item/clothing/gloves/roguetown/leather
 	head = /obj/item/clothing/head/roguetown/hatfur
 	if(prob(50))
 		head = /obj/item/clothing/head/roguetown/hatblu

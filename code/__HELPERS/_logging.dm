@@ -92,6 +92,10 @@
 	if (CONFIG_GET(flag/log_attack))
 		WRITE_LOG(GLOB.world_attack_log, "\[[logtime]] ATTACK: [text]")
 
+/proc/log_looc(text)
+	if (CONFIG_GET(flag/log_looc))
+		WRITE_LOG(GLOB.world_game_log, "\[[logtime]] LOOC: [text]")
+
 /proc/log_manifest(ckey, datum/mind/mind,mob/body, latejoin = FALSE)
 	if (CONFIG_GET(flag/log_manifest))
 		WRITE_LOG(GLOB.world_manifest_log, "\[[logtime]] [ckey] \\ [body.real_name] \\ [mind.assigned_role] \\ [mind.special_role ? mind.special_role : "NONE"] \\ [latejoin ? "LATEJOIN":"ROUNDSTART"]")
@@ -117,10 +121,6 @@
 /proc/log_ooc(text)
 	if (CONFIG_GET(flag/log_ooc))
 		WRITE_LOG(GLOB.world_game_log, "\[[logtime]] OOC: [text]")
-
-/proc/log_looc(text)
-	if (CONFIG_GET(flag/log_looc))
-		WRITE_LOG(GLOB.world_game_log, "\[[logtime]] LOOC: [text]")
 
 /proc/log_whisper(text)
 	if (CONFIG_GET(flag/log_whisper))

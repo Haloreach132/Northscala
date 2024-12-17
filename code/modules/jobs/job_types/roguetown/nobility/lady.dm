@@ -1,6 +1,5 @@
 /datum/job/roguetown/lady
-	title = "Lord"
-	f_title = "Lady"
+	title = "Duchess"
 	flag = LADY
 	department_flag = NOBLEMEN
 	faction = "Station"
@@ -16,7 +15,7 @@
 
 	display_order = JDO_LADY
 	give_bank_account = TRUE
-	min_pq = 0
+	min_pq = 2
 	max_pq = null
 
 /datum/job/roguetown/exlady //just used to change the ladys title
@@ -58,6 +57,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/treatment, 2, TRUE)
 		H.change_stat("intelligence", 3)
@@ -65,6 +65,10 @@
 		H.change_stat("speed", 2)
 		H.change_stat("perception", 2)
 		H.change_stat("fortune", 5)
+
+/datum/outfit/job/roguetown/lady/post_equip(mob/living/carbon/human/H)
+	..()
+	H.virginity = FALSE
 
 /obj/effect/proc_holder/spell/self/convertrole/servant
 	name = "Recruit Servant"

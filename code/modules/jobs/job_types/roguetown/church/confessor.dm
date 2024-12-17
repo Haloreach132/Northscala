@@ -17,7 +17,7 @@
 
 	outfit = /datum/outfit/job/roguetown/shepherd
 //	spells = list(/obj/effect/proc_holder/spell/invoked/heal, /obj/effect/proc_holder/spell/invoked/shepherd)
-	whitelist_req = FALSE
+	whitelist_req = TRUE
 	display_order = JDO_SHEPHERD
 	give_bank_account = 3
 	min_pq = 0

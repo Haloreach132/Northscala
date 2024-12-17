@@ -25,16 +25,6 @@
 		GLOB.materials_list[D.id] = D
 	sortList(GLOB.materials_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
 
-	// Ported from Lethalstone
-	for (var/path in subtypesof(/datum/statpack))
-		var/datum/statpack/statpack = new path()
-		GLOB.statpacks[path] = statpack
-	sortList(GLOB.statpacks, GLOBAL_PROC_REF(cmp_text_dsc))
-
-	for (var/path in subtypesof(/datum/virtue))
-		var/datum/virtue/virtue = new path()
-		GLOB.virtues[path] = virtue
-
 	// Keybindings
 	init_keybindings()
 
@@ -64,6 +54,21 @@
 		GLOB.patrons_by_faith[patron.associated_faith][path] = patron
 		if(patron.preference_accessible)
 			GLOB.preference_patrons[path] = patron
+
+	// Ported from Lethalstone
+	for (var/path in subtypesof(/datum/statpack))
+		var/datum/statpack/statpack = new path()
+		GLOB.statpacks[path] = statpack
+	sortList(GLOB.statpacks, GLOBAL_PROC_REF(cmp_text_dsc))
+
+	for (var/path in subtypesof(/datum/virtue))
+		var/datum/virtue/virtue = new path()
+		GLOB.virtues[path] = virtue
+
+	// Loadout items
+	for (var/path in subtypesof(/datum/loadout_item))
+		var/datum/loadout_item/loadout_item = new path()
+		GLOB.loadout_items[path] = loadout_item
 
 //creates every subtype of prototype (excluding prototype) and adds it to list L.
 //if no list/L is provided, one is created.

@@ -1,3 +1,9 @@
+/datum/virtue/utility/noble
+	name = "Nobility"
+	desc = "By birth, blade or brain, I am noble known to the royalty of these lands, and have all the benefits associated with it."
+	added_traits = list(TRAIT_NOBLE)
+	added_skills = list(/datum/skill/misc/reading = 1)
+
 /datum/virtue/utility/beautiful
 	name = "Beautiful"
 	desc = "Wherever I go, I turn heads, such is my natural beauty."
@@ -58,6 +64,11 @@
 	name = "Feral Appetite"
 	desc = "Raw, toxic or spoiled food doesn't bother my superior digestive system."
 	added_traits = list(TRAIT_NASTY_EATER)
+
+/datum/virtue/utility/night_vision
+	name = "Night-eyed"
+	desc = "I have eyes able to see through cloying darkness."
+	added_traits = list(TRAIT_NIGHT_VISION)
 
 /datum/virtue/utility/learned
 	name = "Learned"

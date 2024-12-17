@@ -400,8 +400,11 @@
 		return
 	var/msg = ""
 	msg += span_info("*---------*\n")
-	for(var/i in shown_skills)
-		msg += "[i] - [SSskills.level_names[known_skills[i]]]\n"
+	for(var/datum/i in shown_skills)
+		var/can_advance_post = sleep_adv.enough_sleep_xp_to_advance(i.type, 1)
+		var/capped_post = sleep_adv.enough_sleep_xp_to_advance(i.type, 2)
+		var/rankup_postfix = capped_post ? span_nicegreen(" <b>(!!)</b>") : can_advance_post ? span_nicegreen(" <b>(!)</b>") : ""
+		msg += "[i] - [SSskills.level_names[known_skills[i]]][rankup_postfix]\n"
 	msg += "</span>"
 	to_chat(user, msg)
 
@@ -473,13 +476,6 @@
 			if(istype(A))
 				if(A.type == datum_type)
 					return A
-
-/datum/mind/proc/remove_traitor()
-	remove_antag_datum(/datum/antagonist/traitor)
-
-
-/datum/mind/proc/remove_all_antag() //For the Lazy amongst us.
-	remove_traitor()
 
 /datum/mind/proc/equip_traitor(employer = "The Syndicate", silent = FALSE, datum/antagonist/uplink_owner)
 	return
@@ -679,12 +675,6 @@
 		O.update_explanation_text()
 		to_chat(current, "<B>[O.flavor] #[obj_count]</B>: [O.explanation_text]")
 		obj_count++
-
-
-/datum/mind/proc/make_Traitor()
-	if(!(has_antag_datum(/datum/antagonist/traitor)))
-		add_antag_datum(/datum/antagonist/traitor)
-
 
 /datum/mind/proc/AddSpell(obj/effect/proc_holder/spell/S)
 	if(!S)

@@ -13,13 +13,12 @@
 	speak_emote = list("growls")
 	see_in_dark = 6
 	move_to_delay = 3
-	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, INTENT_HARM)
-	possible_mmb_intents = list(INTENT_STEAL, INTENT_JUMP, INTENT_KICK, INTENT_BITE, INTENT_GIVE)
+	base_intents = list(/datum/intent/simple/bite)
 	minbodytemp = 0
 	maxbodytemp = INFINITY
 	damage_coeff = list(BRUTE = 1, BURN = 0.2, TOX = 1, CLONE = 1, STAMINA = 0, OXY = 1)
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/rogue/meat/steak = 20,
-						/obj/item/natural/hide = 10)
+						/obj/item/natural/hide = 10, /obj/item/natural/bundle/bone/full = 4)
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	health = 800
 	maxHealth = 800
@@ -46,12 +45,6 @@
 	attack_sound = list('sound/combat/hits/blunt/genblunt (1).ogg','sound/combat/hits/blunt/genblunt (2).ogg','sound/combat/hits/blunt/genblunt (3).ogg','sound/combat/hits/blunt/flailhit.ogg')
 	dodgetime = 30
 	aggressive = 1
-	dextrous = TRUE
-	held_items = list(null, null)
-	var/obj/item/internal_storage //what we're storing within ourself
-	pixel_x = -30
-	/// Pixel y offset
-	pixel_y = 0
 //	stat_attack = UNCONSCIOUS
 
 /mob/living/simple_animal/hostile/retaliate/rogue/dragon/Initialize()
@@ -195,7 +188,7 @@
         var/mob/living/M = target
         var/atom/throw_target = get_edge_target_turf(M, angle2dir(Angle))
         M.throw_at(throw_target, exp_light, EXPLOSION_THROW_SPEED)
-
+    
 /mob/living/simple_animal/hostile/retaliate/rogue/dragon/broodmother
 	health = 1600
 	maxHealth = 1600

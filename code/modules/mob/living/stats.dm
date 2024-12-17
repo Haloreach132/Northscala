@@ -1,12 +1,4 @@
 
-#define STAT_STRENGTH "strength"
-#define STAT_PERCEPTION "perception"
-#define STAT_INTELLIGENCE "intelligence"
-#define STAT_CONSTITUTION "constitution"
-#define STAT_ENDURANCE "endurance"
-#define STAT_SPEED "speed"
-#define STAT_FORTUNE "fortune"
-
 /mob/living
 	var/STASTR = 10
 	var/STAPER = 10
@@ -56,6 +48,7 @@
 		change_stat(S, how_much)
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
+
 		if (H.statpack)
 			H.statpack.apply_to_human(H)
 		if(H.dna.species)
@@ -99,7 +92,6 @@
 			set_eye_color(H, "#c71d76", "#c71d76")
 		if(isseelie(src))	//Check necessary to prevent seelie getting default stats when no other changes apply
 			change_stat("strength", -9)
-
 
 /mob/living/proc/change_stat(stat, amt, index)
 	if(!stat)
@@ -162,8 +154,7 @@
 				newamt--
 				BUFPER++
 			STAPER = newamt
-			see_override = initial(src.see_invisible) + (STAPER/5) // this is pretty bad but 20 PERCEPTION will give you 4 see_invis (significant)
-			update_sight() //Needed.
+
 			update_fov_angles()
 
 		if("intelligence")
