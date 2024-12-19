@@ -109,11 +109,3 @@
 	desc = "I must make love!"
 	time = 50 MINUTES
 	needsate_text = "Time to get happy."
-
-/// SADIST
-
-/datum/charflaw/addiction/sadist
-	name = "Sadist"
-	desc = "There is no greater pleasure than the suffering of another."
-	time = 40 MINUTES
-	needsate_text = "I need to hear someone whimper."

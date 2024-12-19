@@ -1,6 +1,6 @@
 /obj/item/organ/penis
 	name = "penis"
-	icon_state = "severedtail"
+	icon_state = "penis" 
 	visible_organ = TRUE
 	zone = BODY_ZONE_PRECISE_GROIN
 	slot = ORGAN_SLOT_PENIS
@@ -34,7 +34,7 @@
 	name = "knotted penis"
 	penis_type = PENIS_TYPE_KNOTTED
 	sheath_type = SHEATH_TYPE_NORMAL
-	icon_state = "knotpenis"
+	icon_state = "knotpenis" 
 
 /obj/item/organ/penis/knotted/big
 	penis_size = 3
@@ -89,7 +89,7 @@
 
 /obj/item/organ/vagina
 	name = "vagina"
-	icon_state = "severedtail"
+	icon_state = "womb"
 	visible_organ = TRUE
 	zone = BODY_ZONE_PRECISE_GROIN
 	slot = ORGAN_SLOT_VAGINA
@@ -111,7 +111,7 @@
 
 /obj/item/organ/breasts
 	name = "breasts"
-	icon_state = "severedtail"
+	icon_state = "breasts"
 	visible_organ = TRUE
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_BREASTS
@@ -122,7 +122,7 @@
 
 /obj/item/organ/testicles
 	name = "testicles"
-	icon_state = "severedtail"
+	icon_state = "testicles"
 	visible_organ = TRUE
 	zone = BODY_ZONE_PRECISE_GROIN
 	slot = ORGAN_SLOT_TESTICLES

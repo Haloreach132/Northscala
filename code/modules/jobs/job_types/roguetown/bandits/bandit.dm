@@ -18,11 +18,7 @@
 	min_pq = 5
 	max_pq = null
 
-<<<<<<< Updated upstream:code/modules/jobs/job_types/roguetown/bandits/bandit.dm
 	subclass_cat_rolls = list(CTAG_BANDIT = 20)
-=======
-	advclass_cat_rolls = list(CTAG_BANDIT = 30)
->>>>>>> Stashed changes:code/modules/jobs/job_types/roguetown/adventurer/bandit.dm
 	PQ_boost_divider = 10
 
 	wanderer_examine = TRUE
@@ -30,7 +26,7 @@
 	advjob_examine = TRUE
 	always_show_on_latechoices = TRUE
 	job_reopens_slots_on_death = FALSE //no endless stream of bandits, unless the migration waves deem it so
-	same_job_respawn_delay = 1 MINUTES
+	same_job_respawn_delay = 30 MINUTES
 
 
 	cmode_music = 'sound/music/combat_bandit2.ogg'

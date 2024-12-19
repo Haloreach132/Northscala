@@ -27,11 +27,11 @@
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,0)
 		)
 	specstats = list(
-		"strength" = -2,
-		"perception" = 0,
-		"intelligence" = 1,
-		"constitution" = 0,
-		"endurance" = 0,
+		"strength" = -2, 
+		"perception" = 0, 
+		"intelligence" = 1, 
+		"constitution" = 0, 
+		"endurance" = 0, 
 		"speed" = 2,
 		"fortune" = 0
 		)
@@ -52,10 +52,10 @@
 		ORGAN_SLOT_ANTENNAS = /obj/item/organ/antennas/moth,
 		ORGAN_SLOT_NECK_FEATURE = /obj/item/organ/neck_feature/moth_fluff,
 		ORGAN_SLOT_WINGS = /obj/item/organ/wings/moth,
-		//ORGAN_SLOT_TESTICLES = /obj/item/organ/testicles,
-		//ORGAN_SLOT_PENIS = /obj/item/organ/penis/tapered,
-		//ORGAN_SLOT_BREASTS = /obj/item/organ/breasts,
-		//ORGAN_SLOT_VAGINA = /obj/item/organ/vagina,
+		ORGAN_SLOT_TESTICLES = /obj/item/organ/testicles,
+		ORGAN_SLOT_PENIS = /obj/item/organ/penis/tapered,
+		ORGAN_SLOT_BREASTS = /obj/item/organ/breasts,
+		ORGAN_SLOT_VAGINA = /obj/item/organ/vagina,
 		)
 	customizers = list(
 		/datum/customizer/organ/eyes/moth,

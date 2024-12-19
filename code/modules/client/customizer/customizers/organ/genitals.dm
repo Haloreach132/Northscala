@@ -1,12 +1,9 @@
 /datum/customizer/organ/penis
 	abstract_type = /datum/customizer/organ/penis
 	name = "Penis"
-	allows_disabling = TRUE
-	default_disabled = TRUE
-	gender_enabled = MALE
 
 /datum/customizer/organ/penis/is_allowed(datum/preferences/prefs)
-	return TRUE
+	return (prefs.gender == MALE)
 
 /datum/customizer_choice/organ/penis
 	abstract_type = /datum/customizer_choice/organ/penis
@@ -109,7 +106,7 @@
 		/datum/sprite_accessory/penis/knotted,
 		/datum/sprite_accessory/penis/knotted2,
 		)
-
+	
 /datum/customizer_choice/organ/penis/equine
 	name = "Equine Penis"
 	organ_type = /obj/item/organ/penis/equine
@@ -169,12 +166,9 @@
 /datum/customizer/organ/testicles
 	abstract_type = /datum/customizer/organ/testicles
 	name = "Testicles"
-	allows_disabling = TRUE
-	default_disabled = TRUE
-	gender_enabled = MALE
 
 /datum/customizer/organ/testicles/is_allowed(datum/preferences/prefs)
-	return TRUE
+	return (prefs.gender == MALE)
 
 /datum/customizer_choice/organ/testicles
 	abstract_type = /datum/customizer_choice/organ/testicles
@@ -251,12 +245,9 @@
 /datum/customizer/organ/breasts
 	abstract_type = /datum/customizer/organ/breasts
 	name = "Breasts"
-	allows_disabling = TRUE
-	default_disabled = TRUE
-	gender_enabled = FEMALE
 
 /datum/customizer/organ/breasts/is_allowed(datum/preferences/prefs)
-	return TRUE
+	return (prefs.gender == FEMALE)
 
 /datum/customizer_choice/organ/breasts
 	abstract_type = /datum/customizer_choice/organ/breasts
@@ -316,12 +307,9 @@
 /datum/customizer/organ/vagina
 	abstract_type = /datum/customizer/organ/vagina
 	name = "Vagina"
-	allows_disabling = TRUE
-	default_disabled = TRUE
-	gender_enabled = FEMALE
 
 /datum/customizer/organ/vagina/is_allowed(datum/preferences/prefs)
-	return TRUE
+	return (prefs.gender == FEMALE)
 
 /datum/customizer_choice/organ/vagina
 	abstract_type = /datum/customizer_choice/organ/vagina

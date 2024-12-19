@@ -84,17 +84,13 @@
 /proc/log_law(text)
 	if (CONFIG_GET(flag/log_law))
 		WRITE_LOG(GLOB.world_game_log, "\[[logtime]] LAW: [text]")
-
+	
 /proc/log_seen_internal(text)
 	WRITE_LOG(GLOB.world_seen_log, "\[[logtime]] SEEN: [text]")
 
 /proc/log_attack(text)
 	if (CONFIG_GET(flag/log_attack))
 		WRITE_LOG(GLOB.world_attack_log, "\[[logtime]] ATTACK: [text]")
-
-/proc/log_looc(text)
-	if (CONFIG_GET(flag/log_looc))
-		WRITE_LOG(GLOB.world_game_log, "\[[logtime]] LOOC: [text]")
 
 /proc/log_manifest(ckey, datum/mind/mind,mob/body, latejoin = FALSE)
 	if (CONFIG_GET(flag/log_manifest))

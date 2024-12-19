@@ -48,9 +48,6 @@
 		change_stat(S, how_much)
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-
-		if (H.statpack)
-			H.statpack.apply_to_human(H)
 		if(H.dna.species)
 			// Species stats
 			for(var/S in H.dna.species.specstats)

@@ -31,11 +31,6 @@
 
 /datum/sprite_accessory/penis/human
 	icon_state = "human"
-	name = "no name"
-	color_key_defaults = list(KEY_CHEST_COLOR, KEY_CHEST_COLOR)
-
-/datum/sprite_accessory/penis/human/real
-	icon_state = "human"
 	name = "Plain"
 	color_key_defaults = list(KEY_CHEST_COLOR, KEY_CHEST_COLOR)
 
@@ -108,11 +103,6 @@
 
 /datum/sprite_accessory/testicles/pair
 	name = "Pair"
-	icon_state = "no name"
-	color_key_defaults = list(KEY_SKIN_COLOR)
-
-/datum/sprite_accessory/testicles/pair/real
-	name = "Pair"
 	icon_state = "pair"
 	color_key_defaults = list(KEY_SKIN_COLOR)
 
@@ -132,11 +122,6 @@
 	return is_human_part_visible(owner, HIDEBOOB|HIDEJUMPSUIT)
 
 /datum/sprite_accessory/breasts/pair
-	icon_state = "pair"
-	name = "no name"
-	color_key_defaults = list(KEY_CHEST_COLOR)
-
-/datum/sprite_accessory/breasts/pair/real
 	icon_state = "pair"
 	name = "Pair"
 	color_key_defaults = list(KEY_CHEST_COLOR)
@@ -163,11 +148,6 @@
 	return is_human_part_visible(owner, HIDECROTCH|HIDEJUMPSUIT)
 
 /datum/sprite_accessory/vagina/human
-	icon_state = "human"
-	name = "no name"
-	default_colors = list("ea6767")
-
-/datum/sprite_accessory/vagina/human/real
 	icon_state = "human"
 	name = "Plain"
 	default_colors = list("ea6767")

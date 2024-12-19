@@ -2,7 +2,7 @@
 	race = /datum/species/anthromorphsmall
 
 /datum/species/anthromorphsmall
-	name = "Verminvolk"
+	name = "Verminvolk" 
 	id = "anthromorphsmall"
 	desc = "A race akin to wild-kin, except afflicted with significantly smaller stature. A bit less respected than their kin due to their closer resemblance to vermin, like the dichotomy between Kobold and Sissean."
 	default_color = "444"
@@ -38,12 +38,12 @@
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES = list(0,-4), OFFSET_UNDIES_F = list(0,-4), \
 		)
 	specstats = list(
-		"strength" = -2,
-		"perception" = 1,
-		"intelligence" = 1,
-		"constitution" = -1,
-		"endurance" = 0,
-		"speed" = 2,
+		"strength" = -2, 
+		"perception" = 1, 
+		"intelligence" = 1, 
+		"constitution" = -1, 
+		"endurance" = 0, 
+		"speed" = 2, 
 		"fortune" = 0
 		)
 	enflamed_icon = "widefire"
@@ -57,10 +57,10 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
-		//ORGAN_SLOT_TESTICLES = /obj/item/organ/testicles,
-		//ORGAN_SLOT_PENIS = /obj/item/organ/penis/tapered,
-		//ORGAN_SLOT_BREASTS = /obj/item/organ/breasts,
-		//ORGAN_SLOT_VAGINA = /obj/item/organ/vagina,
+		ORGAN_SLOT_TESTICLES = /obj/item/organ/testicles,
+		ORGAN_SLOT_PENIS = /obj/item/organ/penis/tapered,
+		ORGAN_SLOT_BREASTS = /obj/item/organ/breasts,
+		ORGAN_SLOT_VAGINA = /obj/item/organ/vagina,
 		)
 	bodypart_features = list(
 		/datum/bodypart_feature/hair/head,
