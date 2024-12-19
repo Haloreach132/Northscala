@@ -13,7 +13,7 @@
 	bypass_lastclass = TRUE
 	banned_leprosy = FALSE
 
-	advclass_cat_rolls = list(CTAG_PILGRIM = 10)
+	advclass_cat_rolls = list(CTAG_PILGRIM = 30)
 	PQ_boost_divider = 10
 
 	display_order = JDO_PILGRIM

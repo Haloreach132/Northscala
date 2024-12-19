@@ -36,7 +36,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		// Apply the stuff if we dont have a job for some reason
 		apply_character_post_equipment(character, player)
 		return
-	if(length(job.advclass_cat_rolls))
+	if(length(job.subclass_cat_rolls))
 		// Dont apply the stuff, let adv class handler do it later
 		return
 	// Apply the stuff if we have a job that has no adv classes
@@ -47,6 +47,19 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		player = character.client
 	apply_charflaw_equipment(character, player)
 	apply_prefs_special(character, player)
+	apply_prefs_virtue(character, player)
+	if(player.prefs.loadout)
+		character.mind.special_items[player.prefs.loadout.name] = player.prefs.loadout.path
+
+/proc/apply_prefs_virtue(mob/living/carbon/human/character, client/player)
+	if (!player)
+		player = character.client
+	if (!player)
+		return
+	if (!player.prefs)
+		return
+	var/virtue_type = player.prefs.virtue
+	apply_virtue(character, virtue_type)
 
 /proc/apply_charflaw_equipment(mob/living/carbon/human/character, client/player)
 	if(character.charflaw)

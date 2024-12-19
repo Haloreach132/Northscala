@@ -31,12 +31,12 @@
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES = list(0,-4), OFFSET_UNDIES_F = list(0,-4), \
 		)
 	specstats = list(
-		"strength" = -2, 
-		"perception" = 0, 
-		"intelligence" = 1, 
+		"strength" = -2,
+		"perception" = 0,
+		"intelligence" = 1,
 		"constitution" = -1,
-		"endurance" = 1, 
-		"speed" = 2, 
+		"endurance" = 1,
+		"speed" = 2,
 		"fortune" = 0
 		)
 	enflamed_icon = "widefire"
@@ -57,10 +57,10 @@
 		ORGAN_SLOT_SNOUT = /obj/item/organ/snout/lizard,
 		ORGAN_SLOT_FRILLS = /obj/item/organ/frills/lizard,
 		ORGAN_SLOT_HORNS = /obj/item/organ/horns,
-		ORGAN_SLOT_TESTICLES = /obj/item/organ/testicles,
-		ORGAN_SLOT_PENIS = /obj/item/organ/penis/tapered,
-		ORGAN_SLOT_BREASTS = /obj/item/organ/breasts,
-		ORGAN_SLOT_VAGINA = /obj/item/organ/vagina,
+		//ORGAN_SLOT_TESTICLES = /obj/item/organ/testicles,
+		//ORGAN_SLOT_PENIS = /obj/item/organ/penis/tapered,
+		//ORGAN_SLOT_BREASTS = /obj/item/organ/breasts,
+		//ORGAN_SLOT_VAGINA = /obj/item/organ/vagina,
 		)
 	customizers = list(
 		/datum/customizer/organ/eyes/humanoid,
