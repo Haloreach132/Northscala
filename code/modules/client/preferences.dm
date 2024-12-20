@@ -65,6 +65,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/slot_randomized					//keeps track of round-to-round randomization of the character slot, prevents overwriting
 	var/real_name						//our character's name
 	var/gender = MALE					//gender of character (well duh)
+	var/datum/statpack/statpack	= new /datum/statpack/wildcard/fated // LETHALSTONE EDIT: the statpack we're giving our char instead of racial bonuses
+	var/datum/virtue/virtue = new /datum/virtue/none // LETHALSTONE EDIT: the virtue we get for not picking a statpack
 	var/age = AGE_ADULT						//age of character
 	var/origin = "Default"
 	var/underwear = "Nude"				//underwear type
@@ -92,6 +94,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/list/randomise = list(RANDOM_UNDERWEAR = TRUE, RANDOM_UNDERWEAR_COLOR = TRUE, RANDOM_UNDERSHIRT = TRUE, RANDOM_SOCKS = TRUE, RANDOM_BACKPACK = TRUE, RANDOM_JUMPSUIT_STYLE = FALSE, RANDOM_SKIN_TONE = TRUE, RANDOM_EYE_COLOR = TRUE)
 	var/list/friendlyGenders = list("Male" = "male", "Female" = "female")
 	var/phobia = "spiders"
+	var/shake = TRUE
+	var/sexable = FALSE
 
 	var/list/custom_names = list()
 	var/preferred_ai_core_display = "Blue"
@@ -141,6 +145,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/family = FAMILY_NONE
 
 	var/crt = FALSE
+	var/grain = TRUE
 
 	var/list/customizer_entries = list()
 	var/list/list/body_markings = list()
@@ -148,6 +153,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 	var/headshot_link
 	var/nudeshot_link
+	var/datum/loadout_item/loadout
 
 	var/list/violated = list()
 	var/list/descriptor_entries = list()
@@ -311,6 +317,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 			dat += "<BR>"
 			dat += "<b>Race:</b> <a href='?_src_=prefs;preference=species;task=input'>[pref_species.name]</a>[spec_check(user) ? "" : " (!)"]<BR>"
+
+			// LETHALSTONE EDIT BEGIN: add statpack selection
+			dat += "<b>Statpack:</b> <a href='?_src_=prefs;preference=statpack;task=input'>[statpack.name]</a><BR>"
 //			dat += "<a href='?_src_=prefs;preference=species;task=random'>Random Species</A> "
 //			dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_SPECIES]'>Always Random Species: [(randomise[RANDOM_SPECIES]) ? "Yes" : "No"]</A><br>"
 
@@ -335,6 +344,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 //				dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_AGE_ANTAG]'>When Antagonist: [(randomise[RANDOM_AGE_ANTAG]) ? "Yes" : "No"]</A>"
 
 //			dat += "<b><a href='?_src_=prefs;preference=name;task=random'>Random Name</A></b><BR>"
+			dat += "<b>Virtue:</b> <a href='?_src_=prefs;preference=virtue;task=input'>[virtue]</a><BR>"
 			dat += "<b>Flaw:</b> <a href='?_src_=prefs;preference=charflaw;task=input'>[charflaw]</a><BR>"
 			var/datum/faith/selected_faith = GLOB.faithlist[selected_patron?.associated_faith]
 			dat += "<b>Faith:</b> <a href='?_src_=prefs;preference=faith;task=input'>[selected_faith?.name || "FUCK!"]</a><BR>"
@@ -402,6 +412,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<br><b>Nudeshot(3:4):</b> <a href='?_src_=prefs;preference=nudeshot;task=input'>Change</a>"
 			if(nudeshot_link != null)
 				dat += "<a href='?_src_=prefs;preference=view_nudeshot;task=input'>View</a>"
+			dat += "<br><b>Loadout Item:</b> <a href='?_src_=prefs;preference=loadout_item;task=input'>[loadout ? loadout.name : "None"]</a>"
 			dat += "</td>"
 
 			dat += "</tr></table>"
@@ -1359,6 +1370,26 @@ Slots: [job.spawn_positions]</span>
 						ResetJobs()
 						to_chat(user, "<font color='red'>Classes reset.</font>")
 
+				// LETHALSTONE EDIT: add statpack selection
+				if ("statpack")
+					var/list/statpacks_available = list()
+					for (var/path as anything in GLOB.statpacks)
+						var/datum/statpack/statpack = GLOB.statpacks[path]
+						if (!statpack.name)
+							continue
+						statpacks_available[statpack.name] = statpack
+
+					var/statpack_input = input(user, "Choose your character's statpack", "Statpack") as null|anything in statpacks_available
+					if (statpack_input)
+						var/datum/statpack/statpack_chosen = statpacks_available[statpack_input]
+						statpack = statpack_chosen
+						to_chat(user, "<font color='purple'>[statpack.name]</font>")
+						to_chat(user, "<font color='purple'>[statpack.description_string()]</font>")
+						// also, unset our virtue if we're not a virtuous statpack.
+						if (!istype(statpack, /datum/statpack/wildcard/virtuous) && virtue.type != /datum/virtue/none)
+							virtue = new /datum/virtue/none
+							to_chat(user, span_info("Your virtue has been removed due to taking a stat-altering statpack."))
+
 				if("faith")
 					var/list/faiths_named = list()
 					for(var/path as anything in GLOB.preference_faiths)
@@ -1463,6 +1494,25 @@ Slots: [job.spawn_positions]</span>
 					to_chat(user, "<span class='notice'>Successfully updated nudeshot picture</span>")
 					log_game("[user] has set their Nudeshot image to '[nudeshot_link]'.")
 
+				if("loadout_item")
+					var/list/loadouts_available = list("None")
+					for (var/path as anything in GLOB.loadout_items)
+						var/datum/loadout_item/loadout = GLOB.loadout_items[path]
+						if (!loadout.name)
+							continue
+						loadouts_available[loadout.name] = loadout
+
+					var/loadout_input = input(user, "Choose your character's loadout item. RMB a tree, statue or clock to collect. I cannot stress this enough. YOU DON'T SPAWN WITH THESE. YOU HAVE TO MANUALLY PICK THEM UP!!", "LOADOUT THAT YOU GET FROM A TREE OR STATUE OR CLOCK") as null|anything in loadouts_available
+					if(loadout_input)
+						if(loadout_input == "None")
+							loadout = null
+							to_chat(user, "Who needs stuff anyway?")
+						else
+							loadout = loadouts_available[loadout_input]
+							to_chat(user, "<font color='yellow'><b>[loadout.name]</b></font>")
+							if(loadout.desc)
+								to_chat(user, "[loadout.desc]")
+
 				if("species")
 
 					var/list/crap = list()
@@ -1483,6 +1533,24 @@ Slots: [job.spawn_positions]</span>
 
 				if("update_mutant_colors")
 					update_mutant_colors = !update_mutant_colors
+
+				if("virtue")
+					var/list/virtue_choices = list()
+					for (var/path as anything in GLOB.virtues)
+						var/datum/virtue/virtue = GLOB.virtues[path]
+						if (!virtue.name)
+							continue
+						virtue_choices[virtue.name] = virtue
+					var/result = input(user, "Select a virtue", "Roguetown") as null|anything in virtue_choices
+
+					if (result)
+						var/datum/virtue/virtue_chosen = virtue_choices[result]
+						virtue = virtue_chosen
+						if (virtue.desc)
+							to_chat(user, span_purple(virtue.desc))
+						if (statpack.type != /datum/statpack/wildcard/virtuous)
+							statpack = new /datum/statpack/wildcard/virtuous
+							to_chat(user, span_purple("Your statpack has been set to virtuous (no stats) due to selecting a virtue."))
 
 				if("charflaw")
 					var/list/coom = GLOB.character_flaws.Copy()
@@ -1514,7 +1582,7 @@ Slots: [job.spawn_positions]</span>
 					if(new_mutantcolor)
 						features["mcolor3"] = sanitize_hexcolor(new_mutantcolor)
 						try_update_mutant_colors()
-				
+
 				if("char_accent")
 					var/selectedaccent = input(user, "Choose your character's accent:", "Character Preference") as null|anything in GLOB.character_accents
 					if(selectedaccent)
@@ -1868,7 +1936,7 @@ Slots: [job.spawn_positions]</span>
 				if("be_virgin")
 					virginity = !virginity
 					if(virginity)
-						to_chat(user, span_notice("You have not once indulged in the temptations of the flesh.")) 
+						to_chat(user, span_notice("You have not once indulged in the temptations of the flesh."))
 					else
 						to_chat(user, span_notice("You have. In a word. Fucked before.")) //Someone word this better please kitty is high and words are hard
 
@@ -2029,6 +2097,8 @@ Slots: [job.spawn_positions]</span>
 	character.headshot_link = headshot_link
 	character.nudeshot_link = nudeshot_link
 
+	character.statpack = statpack
+
 	if(parent)
 		var/list/L = get_player_curses(parent.ckey)
 		if(L)
@@ -2046,7 +2116,7 @@ Slots: [job.spawn_positions]</span>
 		character.update_body()
 		character.update_hair()
 		character.update_body_parts(redraw = TRUE)
-	
+
 	character.char_accent = char_accent
 
 /datum/preferences/proc/get_default_name(name_id)

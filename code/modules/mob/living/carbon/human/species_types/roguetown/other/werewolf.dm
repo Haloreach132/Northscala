@@ -40,12 +40,12 @@
 	soundpack_m = /datum/voicepack/werewolf
 	soundpack_f = /datum/voicepack/werewolf
 	specstats = list(
-		"strength" = 5, 
-		"perception" = 5, 
-		"intelligence" = -3, 
-		"constitution" = 5, 
-		"endurance" = 5, 
-		"speed" = 3, 
+		"strength" = 5,
+		"perception" = 5,
+		"intelligence" = -3,
+		"constitution" = 5,
+		"endurance" = 5,
+		"speed" = 3,
 		"fortune" = 0
 		)
 	enflamed_icon = "widefire"
@@ -59,10 +59,10 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
-		ORGAN_SLOT_TESTICLES = /obj/item/organ/testicles,
-		ORGAN_SLOT_PENIS = /obj/item/organ/penis/knotted/big,
-		ORGAN_SLOT_BREASTS = /obj/item/organ/breasts,
-		ORGAN_SLOT_VAGINA = /obj/item/organ/vagina,
+		//ORGAN_SLOT_TESTICLES = /obj/item/organ/testicles,
+		//ORGAN_SLOT_PENIS = /obj/item/organ/penis/knotted/big,
+		//ORGAN_SLOT_BREASTS = /obj/item/organ/breasts,
+		//ORGAN_SLOT_VAGINA = /obj/item/organ/vagina,
 		)
 	languages = list(
 		/datum/language/beast,

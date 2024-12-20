@@ -1798,7 +1798,7 @@
 	name = ""
 	screen_loc = "1,1"
 	mouse_opacity = 0
-	alpha = 55 // I DO SEE NOTHING WITH 70 ALPHA
+	alpha = 0 // I DO SEE NOTHING WITH 70 ALPHA
 //	layer = 20.5
 //	plane = 20
 	layer = 13

@@ -21,8 +21,8 @@ GLOBAL_VAR_INIT(hugbox_duration_still, 3 MINUTES)
 	show_in_credits = TRUE
 	min_pq = 0
 	max_pq = null
-	
-	subclass_cat_rolls = list(CTAG_REFUGEE = 5)
+
+	subclass_cat_rolls = list(CTAG_REFUGEE = 35)
 	PQ_boost_divider = 10
 
 	wanderer_examine = TRUE
@@ -30,7 +30,7 @@ GLOBAL_VAR_INIT(hugbox_duration_still, 3 MINUTES)
 	advjob_examine = TRUE
 	always_show_on_latechoices = TRUE
 	job_reopens_slots_on_death = TRUE
-	same_job_respawn_delay = 15 MINUTES
+	same_job_respawn_delay = 1 MINUTES
 
 
 /datum/job/roguetown/refugee/after_spawn(mob/living/L, mob/M, latejoin = TRUE)

@@ -19,6 +19,10 @@
 	var/list/statindex = list()
 	var/datum/patron/patron = /datum/patron/godless
 
+/datum/species
+	// Associative list of stat (STAT_STRENGTH, etc) bonuses used to differentiate each race. They should ALWAYS be positive.
+	var/list/race_bonus = list()
+
 /mob/living/proc/init_faith()
 	set_patron(/datum/patron/godless)
 
@@ -48,6 +52,8 @@
 		change_stat(S, how_much)
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
+		if (H.statpack)
+			H.statpack.apply_to_human(H)
 		if(H.dna.species)
 			// Species stats
 			for(var/S in H.dna.species.specstats)
