@@ -73,7 +73,7 @@
 					"eastabove" = 1,
 					"westabove" = 0
 				)
-				
+
 /obj/item/rogue/instrument/Initialize()
 	soundloop = new(list(src), FALSE)
 //	soundloop.start()
@@ -195,3 +195,40 @@
 	song_list = list("Barbarian's Moot" = 'sound/music/instruments/drum (1).ogg',
 	"Muster the Wardens" = 'sound/music/instruments/drum (2).ogg',
 	"The Earth That Quakes" = 'sound/music/instruments/drum (3).ogg')
+
+/obj/item/rogue/instrument/hurdygurdy
+	name = "hurdy-gurdy"
+	desc = "A knob-driven, wooden string instrument that reminds you of the oceans far."
+	icon_state = "hurdygurdy"
+	song_list = list("Ruler's One Ring" = 'sound/music/instruments/hurdy (1).ogg',
+	"Tangled Trod" = 'sound/music/instruments/hurdy (2).ogg',
+	"Motus" = 'sound/music/instruments/hurdy (3).ogg',
+	"Becalmed" = 'sound/music/instruments/hurdy (4).ogg',
+	"The Bloody Throne" = 'sound/music/instruments/hurdy (5).ogg',
+	"We Shall Sail Together" = 'sound/music/instruments/hurdy (6).ogg')
+
+/obj/item/rogue/instrument/viola
+	name = "viola"
+	desc = "The prim and proper Viola, every prince's first instrument taught."
+	icon_state = "viola"
+	song_list = list("Far Flung Tale" = 'sound/music/instruments/viola (1).ogg',
+	"G Major Cello Suite No. 1" = 'sound/music/instruments/viola (2).ogg',
+	"Ursine's Home" = 'sound/music/instruments/viola (3).ogg',
+	"Mead, Gold and Blood" = 'sound/music/instruments/viola (4).ogg',
+	"Gasgow's Reel" = 'sound/music/instruments/viola (5).ogg')
+
+/obj/item/rogue/instrument/vocals
+	name = "vocalist's talisman"
+	desc = "This talisman eminates a small shimmer of light. When held, it can amplify and even change a bard's voice."
+	icon_state = "vtalisman"
+	song_list = list("Harpy's Call (Feminine)" = 'sound/music/instruments/vocalsf (1).ogg',
+	"Necra's Lullaby (Feminine)" = 'sound/music/instruments/vocalsf (2).ogg',
+	"Death Touched Aasimar (Feminine)" = 'sound/music/instruments/vocalsf (3).ogg',
+	"Our Mother, Our Divine (Feminine)" = 'sound/music/instruments/vocalsf (4).ogg',
+	"Wed, Forever More (Feminine)" = 'sound/music/instruments/vocalsf (5).ogg',
+	"Paper Boats (Feminine + Vocals)" = 'sound/music/instruments/vocalsf (6).ogg',
+	"The Dragon's Blood Surges (Masculine)" = 'sound/music/instruments/vocalsm (1).ogg',
+	"Timeless Temple (Masculine)" = 'sound/music/instruments/vocalsm (2).ogg',
+	"Angel's Earnt Halo (Masculine)" = 'sound/music/instruments/vocalsm (3).ogg',
+	"A Fabled Choir (Masculine)" = 'sound/music/instruments/vocalsm (4).ogg',
+	"A Pained Farewell (Masculine + Feminine)" = 'sound/music/instruments/vocalsx (1).ogg')
