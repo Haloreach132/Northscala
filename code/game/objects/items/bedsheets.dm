@@ -30,6 +30,7 @@ LINEN BINS
 		return
 	if(layer == initial(layer))
 		layer = ABOVE_MOB_LAYER
+		plane = GAME_PLANE_UPPER
 		to_chat(user, "<span class='notice'>I cover myself with [src].</span>")
 		pixel_x = 0
 		pixel_y = 0

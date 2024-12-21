@@ -54,6 +54,8 @@
 	var/message2recognize = sanitize_hear_message(message)
 	var/mob/living/carbon/human/M = L
 	if(length(message2recognize) > 15)
+		if(L.has_flaw(/datum/charflaw/addiction/godfearing))
+			L.sate_addiction()
 		if(L.mob_timers[MT_PSYPRAY])
 			if(world.time < L.mob_timers[MT_PSYPRAY] + 1 MINUTES)
 				L.mob_timers[MT_PSYPRAY] = world.time
@@ -66,7 +68,7 @@
 			L.playsound_local(L, 'sound/misc/notice (2).ogg', 100, FALSE)
 			L.add_stress(/datum/stressevent/psyprayer)
 			return TRUE
-	else 
+	else
 		to_chat(L, span_danger("My prayer was kinda short..."))
 
 /mob/living/proc/check_prayer_underworld(mob/living/L,message)
@@ -93,12 +95,12 @@
 		if(findtext(message2recognize, "[M.patron]"))
 			L.playsound_local(L, 'sound/misc/notice (2).ogg', 100, FALSE)
 			to_chat(L, "<font color='yellow'>I, [M.patron], have heard your prayer and yet cannot aid you.</font>")
-			/*var/obj/item/underworld/coin/C = new 
+			/*var/obj/item/underworld/coin/C = new
 			L.put_in_active_hand(C)*/
 			return TRUE
 		else
 			return TRUE
-	else 
+	else
 		to_chat(L, span_danger("My prayer was kinda short..."))
 
 /datum/emote/living/meditate
