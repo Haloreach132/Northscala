@@ -22,7 +22,7 @@ GLOBAL_VAR_INIT(hugbox_duration_still, 3 MINUTES)
 	min_pq = 0
 	max_pq = null
 
-	subclass_cat_rolls = list(CTAG_REFUGEE = 35)
+	subclass_cat_rolls = list(CTAG_REFUGEE = 5)
 	PQ_boost_divider = 10
 
 	wanderer_examine = TRUE
@@ -30,7 +30,7 @@ GLOBAL_VAR_INIT(hugbox_duration_still, 3 MINUTES)
 	advjob_examine = TRUE
 	always_show_on_latechoices = TRUE
 	job_reopens_slots_on_death = TRUE
-	same_job_respawn_delay = 1 MINUTES
+	same_job_respawn_delay = 15 MINUTES
 
 	family_blacklisted = TRUE //we should have refugee-only families
 
